@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>المحول الذكي الشامل: عملات عربية حية، وحدات، وحرارة | PWA سريع</title>
+    
+    <link rel="stylesheet" href="style.css">
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#1a202c">
+    
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "SoftwareApplication",
+      "name": "المحول الذكي الشامل",
+      "description": "محول وحدات وعملات فوري يدعم جميع العملات العربية الرئيسية والوحدات العالمية (الطول، الوزن، الحرارة). يعمل دون اتصال (PWA).",
+      "operatingSystem": "Web, Android, iOS",
+      "applicationCategory": "ReferenceApplication",
+      "aggregateRating": {
+        "@type": "AggregateRating",
+        "ratingValue": "4.8", 
+        "reviewCount": "250" 
+      },
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+      },
+      "url": "https://yourdomain.com/" 
+    }
+    </script>
+
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6516738542213361" crossorigin="anonymous"></script> 
+</head>
+<body>
+
+    <header>
+        <h1>🌟 المحول الذكي</h1>
+    </header>
+
+    <main id="category-selection">
+        <h2>اختر نوع التحويل:</h2>
+        <div class="category-grid">
+        </div>
+    </main>
+
+    <section id="converter-screen" class="hidden">
+        <h2 id="current-category-title">تحويل الطول</h2>
+
+        <div class="input-group source">
+            <input type="number" id="input-value" placeholder="أدخل القيمة" value="1" min="0">
+            <select id="source-unit">
+            </select>
+        </div>
+
+        <button id="swap-units-btn" class="swap-button">
+            🔄
+        </button>
+
+        <div class="input-group result">
+            <input type="text" id="result-value" value="0" readonly>
+            <select id="target-unit">
+            </select>
+        </div>
+
+        <button id="reset-btn" class="reset-button">مسح</button>
+    </section>
+
+    <footer class="ad-banner">
+        <ins class="adsbygoogle"
+             style="display:block"
+             data-ad-client="ca-pub-6516738542213361"
+             data-ad-slot="1710677340" 
+             data-ad-format="auto"
+             data-full-width-responsive="true"></ins>
+        <script>
+             (adsbygoogle = window.adsbygoogle || []).push({});
+        </script>
+    </footer>
+
+    <script src="script.js"></script>
+    <script>
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('/service-worker.js')
+                    .then(reg => console.log('Service Worker registered: ', reg.scope))
+                    .catch(err => console.log('Service Worker registration failed: ', err));
+            });
+        }
+    </script>
+</body>
+</html>

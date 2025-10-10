@@ -1,0 +1,158 @@
+:root {
+    /* الألوان الأساسية */
+    --bg-color: #1a202c; /* خلفية داكنة */
+    --text-color: #f7fafc; /* نص فاتح */
+    --primary-color: #63b3ed; /* أزرق سماوي للتمييز */
+    --secondary-bg: #2d3748; /* خلفية البطاقات والحقول */
+    --border-color: #4a5568;
+}
+
+/* تطبيق الوضع المظلم على الجسم */
+body {
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    text-align: right; /* محاذاة عربية */
+    padding-bottom: 60px; /* مساحة لإعلان البانر */
+}
+
+header {
+    padding: 20px;
+    border-bottom: 1px solid var(--border-color);
+    text-align: center;
+}
+
+h1 {
+    font-size: 1.8rem;
+    color: var(--primary-color);
+}
+
+main, section {
+    padding: 20px;
+    max-width: 450px; /* للتركيز على محتوى الهاتف */
+    margin: 0 auto;
+}
+
+/* شاشة اختيار الفئة */
+.category-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
+    margin-top: 20px;
+}
+
+.category-card {
+    background-color: var(--secondary-bg);
+    color: var(--text-color);
+    border: none;
+    padding: 20px 10px;
+    border-radius: 12px;
+    font-size: 1.1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: background-color 0.2s;
+    min-height: 100px;
+}
+
+.category-card:hover {
+    background-color: #4a5568;
+}
+
+.category-card .icon {
+    font-size: 2rem;
+    margin-bottom: 10px;
+}
+
+/* شاشة التحويل */
+.input-group {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 15px;
+    background-color: var(--secondary-bg);
+    border-radius: 10px;
+    padding: 10px;
+}
+
+input[type="number"],
+input[type="text"],
+select {
+    flex-grow: 1;
+    padding: 12px;
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    font-size: 1.2rem;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+}
+
+select {
+    flex-grow: 0;
+    width: 120px;
+    text-align: right;
+    direction: rtl; /* لضمان ظهور النص باليمين */
+}
+
+input[type="text"][readonly] {
+    background-color: #4a5568; /* لون مختلف للنتيجة */
+    font-weight: bold;
+}
+
+/* زر التبديل */
+.swap-button {
+    display: block;
+    margin: 15px auto;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background-color: var(--primary-color);
+    color: var(--bg-color);
+    border: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+    transition: transform 0.2s;
+}
+
+.swap-button:active {
+    transform: rotate(180deg);
+}
+
+/* زر المسح */
+.reset-button {
+    width: 100%;
+    padding: 15px;
+    background-color: #f56565; /* لون أحمر */
+    color: var(--text-color);
+    border: none;
+    border-radius: 10px;
+    font-size: 1.1rem;
+    margin-top: 15px;
+    cursor: pointer;
+}
+
+/* شريط الإعلان */
+.ad-banner {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 50px; /* الحجم النموذجي لإعلان البانر */
+    background-color: #38a169; /* لون مميز للإعلان */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--text-color);
+    font-size: 0.9rem;
+    z-index: 1000; /* لضمان ظهوره فوق المحتوى */
+}
+
+.hidden {
+    display: none;
+}

@@ -1,5 +1,4 @@
-~/smart-converter $ cat style.css
-/* --- CSS Update: Modern Responsive Design --- */
+/* --- CSS Update: Modern Responsive Design and Accessibility Fixes --- */
 
 :root {
     --primary-color: #4A90E2; /* أزرق جذاب */
@@ -7,6 +6,7 @@
     --background-color: #1a202c; /* خلفية داكنة */
     --card-bg: #2d3748; /* خلفية البطاقة */
     --text-color: #e2e8f0; /* نص فاتح */
+    --highlight-color: #FFD700; /* لون ذهبي للنص المميز */
     --border-radius: 12px;
 }
 
@@ -32,14 +32,27 @@ header {
 
 h1 {
     color: var(--primary-color);
-    font-size: 2em;
+    font-size: 2.2em;
+    font-weight: 900; /* خط سميك جداً للعنوان */
+    letter-spacing: 1px;
 }
 
 h2 {
     color: var(--secondary-color);
     text-align: center;
     margin-bottom: 25px;
-    font-size: 1.5em;
+    font-size: 1.6em;
+}
+
+/* 🌟 تحسينات النص الوصفي (النص الخاص بـ AdSense) 🌟 */
+.description-text {
+    text-align: center;
+    font-size: 1.2em; /* حجم أكبر */
+    color: var(--highlight-color); /* لون جذاب (ذهبي) */
+    font-weight: bold; /* خط سميك */
+    margin-bottom: 40px;
+    padding: 0 15px;
+    text-shadow: 0 0 5px rgba(255, 215, 0, 0.3); /* تأثير زاهي خفيف */
 }
 
 /* --- Category Selection Screen --- */
@@ -50,7 +63,7 @@ h2 {
 
 .category-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); /* تجاوب ممتاز */
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
     gap: 15px;
     padding: 10px;
 }
@@ -106,12 +119,19 @@ select {
     border-radius: 8px;
     border: 1px solid #4a5568;
     background-color: #2c313a;
-    color: var(--text-color);
+    color: var(--text-color) !important; /* 🔥 إصلاح مشكلة اللون الأسود (1) */
     font-size: 1em;
-    -webkit-appearance: none; /* لإزالة المظهر الافتراضي */
+    -webkit-appearance: none;
     -moz-appearance: none;
     appearance: none;
 }
+
+/* 🔥 إصلاح مشكلة اللون الأسود (2): التأكد من ظهور النص الفاتح في القائمة المنسدلة */
+select option {
+    background-color: #2c313a; 
+    color: var(--text-color); 
+}
+
 
 select {
     max-width: 150px;
@@ -169,21 +189,15 @@ footer.ad-banner {
     border-top: 1px solid #4a5568;
 }
 
-/* تحسينات إضافية لجعل الواجهة جذابة */
-.description-text {
-    text-align: center;
-    font-size: 1.1em;
-    color: #a0aec0;
-    margin-bottom: 40px;
-    padding: 0 15px;
-}
-
 @media (max-width: 600px) {
     body {
         padding: 10px;
     }
     h1 {
-        font-size: 1.5em;
+        font-size: 1.8em;
+    }
+    .description-text {
+        font-size: 1em;
     }
     .input-group {
         flex-direction: column;

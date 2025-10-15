@@ -7,11 +7,11 @@ const CURRENCY_UPDATE_INTERVAL = 6 * 60 * 60 * 1000; // 6 ساعات
 
 // متغيرات حالة الإعلانات (AdSense/AdMob Logic)
 let interstitialCounter = 0;
-const INTERSTITIAL_FREQUENCY = 5; // أظهر الإعلان البيني كل 5 عمليات عودة
+const INTERSTITIAL_FREQUENCY = 2; // تحديث: أظهر الإعلان البيني كل 2 عمليات عودة
 const AD_CLIENT_ID = 'ca-pub-6516738542213361'; // شفرة الناشر
-const INTERSTITIAL_AD_SLOT = '1710677340'; // شفرة وحدة الإعلان البيني (نستخدم نفس الشفرة للتبسيط)
+const INTERSTITIAL_AD_SLOT = '1710677340'; // شفرة وحدة الإعلان البيني (يرجى مراجعة هذا)
 
-// هيكل البيانات الأساسي للوحدات (نفس الكود السابق)
+// هيكل البيانات الأساسي للوحدات
 const ALL_UNITS = {
     'length': {
         title: 'تحويل الطول',
@@ -52,7 +52,6 @@ const ALL_UNITS = {
 };
 
 const DESIRED_CURRENCIES = {
-    // ... قائمة العملات (بدون تغيير) ...
     'USD': 'دولار أمريكي ($)',
     'EUR': 'يورو (€)',
     'SAR': 'ريال سعودي (SAR)',
@@ -68,7 +67,7 @@ const DESIRED_CURRENCIES = {
     // ... باقي العملات ...
 };
 
-// متغيرات DOM (نفس الكود السابق)
+// متغيرات DOM
 let currentCategory = null;
 const categoryGrid = document.querySelector('.category-grid');
 const mainScreen = document.getElementById('category-selection');
@@ -83,10 +82,8 @@ const resetButton = document.getElementById('reset-btn');
 
 
 // =================================================================
-// 2. دوال التحويل الأساسية (بدون تغيير)
+// 2. دوال التحويل الأساسية
 // =================================================================
-// ... (convertTemperature, convertUnits, fetchCurrencyRates, updateCurrencyUnits) ...
-// (هذه الدوال تظل كما هي من الكود السابق)
 function convertTemperature(value, from, to) {
     let tempInC = 0;
     if (from === 'celsius') tempInC = value;
@@ -96,7 +93,7 @@ function convertTemperature(value, from, to) {
     if (to === 'celsius') return tempInC;
     else if (to === 'fahrenheit') return (tempInC * (9 / 5)) + 32;
     else if (to === 'kelvin') return tempInC + 273.15;
-    
+
     return 0;
 }
 
@@ -104,16 +101,16 @@ function convertUnits(category, value, sourceUnit, targetUnit) {
     if (category === 'temp') {
         return convertTemperature(value, sourceUnit, targetUnit);
     }
-    
+
     const units = ALL_UNITS[category].units;
     let baseValue = 0;
-    
+
     if (category === 'currency') {
         const sourceRate = units[sourceUnit].rate;
         const targetRate = units[targetUnit].rate;
-        
-        baseValue = value / sourceRate; 
-        return baseValue * targetRate;  
+
+        baseValue = value / sourceRate;
+        return baseValue * targetRate;
     } else {
         baseValue = value * units[sourceUnit].factor;
         return baseValue / units[targetUnit].factor;
@@ -136,13 +133,13 @@ async function fetchCurrencyRates() {
     try {
         const response = await fetch(API_URL);
         const data = await response.json();
-        
+
         if (data && data.rates) {
             const ratesData = {
                 rates: data.rates,
                 timestamp: Date.now()
             };
-            
+
             localStorage.setItem(CURRENCY_CACHE_KEY, JSON.stringify(ratesData));
             updateCurrencyUnits(data.rates);
             return true;
@@ -171,39 +168,27 @@ function updateCurrencyUnits(rates) {
 
 
 // =================================================================
-// 3. منطق الإعلانات (AdMob/AdSense Logic)
+// 3. منطق الإعلانات (AdSense Logic) - تم التحديث
 // =================================================================
 
 function showInterstitialAd() {
-    // ** منطق الإعلان البيني (AdSense/AdMob)**
+    // ** منطق الإعلان البيني (AdSense) **
     
-    // لتمكين الإعلان البيني بملء الشاشة في AdSense (مماثل لـ AdMob):
-    // يجب إنشاء وسم إعلان جديد وإجباره على الدفع للعرض.
-    
-    const adContainer = document.createElement('div');
-    adContainer.style.cssText = 'position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.9); z-index:9999; display:flex; justify-content:center; align-items:center;';
-    adContainer.innerHTML = `
-        <div style="position:relative; width:90%; height:90%; max-width:400px; max-height:600px; background:#FFF; padding:10px; border-radius:10px;">
-            <button onclick="this.parentNode.parentNode.remove()" style="position:absolute; top:5px; right:5px; background:none; border:none; font-size:24px; cursor:pointer;">&times;</button>
-            <p style="text-align:center; margin-top:50px;">
-                **هنا يتم تحميل الإعلان البيني الفعلي من AdSense**
-            </p>
-            <ins class="adsbygoogle"
-                 style="display:block; text-align:center;"
-                 data-ad-client="${AD_CLIENT_ID}"
-                 data-ad-slot="${INTERSTITIAL_AD_SLOT}"
-                 data-ad-format="auto"
-                 data-full-width-responsive="true"></ins>
-            <script>
-                 (adsbygoogle = window.adsbygoogle || []).push({});
-            </script>
-        </div>
-    `;
-    
-    document.body.appendChild(adContainer);
-    
-    // **ملاحظة:** هذا الكود يضيف حاوية إعلانية بملء الشاشة، لكن عرض الإعلان الفعلي يعتمد على وقت تحميل AdSense.
-    // في التطبيق الأصلي، يتم استبدال هذا المنطق باستدعاء دالة عرض AdMob SDK.
+    // نستخدم الصيغة الرسمية لطلب إعلان بملء الشاشة عبر AdSense
+    try {
+        if (window.adsbygoogle) {
+            (adsbygoogle = window.adsbygoogle || []).push({
+                google_ad_client: AD_CLIENT_ID, // ca-pub-6516738542213361
+                enable_page_level_ads: true,
+                overlays: {
+                    google_ad_slot: INTERSTITIAL_AD_SLOT 
+                }
+            });
+            console.log("Interstitial ad requested via push.");
+        }
+    } catch (e) {
+        console.error("Error showing interstitial ad:", e);
+    }
 }
 
 
@@ -217,34 +202,32 @@ function returnToMainScreen(shouldUpdateHash = true) {
     converterScreen.classList.add('hidden');
     mainScreen.classList.remove('hidden');
     currentCategory = null;
-    
-    // 2. منطق إظهار الإعلان البيني
+
+    // 2. منطق إظهار الإعلان البيني (يعمل كل 2 عمليات عودة)
     interstitialCounter++;
     if (interstitialCounter >= INTERSTITIAL_FREQUENCY) {
         showInterstitialAd();
-        interstitialCounter = 0; 
+        interstitialCounter = 0;
     }
 }
 
 
 // =================================================================
-// 4. دوال بناء الواجهة والتفاعل (مع الروابط العميقة)
+// 4. دوال بناء الواجهة والتفاعل
 // =================================================================
-// ... (renderCategoryCards, loadConverterScreen, performConversion, swapUnits, handleURLHash) ...
-// (هذه الدوال تظل كما هي من الكود السابق)
 
 function renderCategoryCards() {
     for (const key in ALL_UNITS) {
         const data = ALL_UNITS[key];
-        const button = document.createElement('button');
+        const button = document.createElement('div'); // تم تغييرها إلى div لتحسين التصميم
         button.className = 'category-card';
         button.dataset.category = key;
         button.innerHTML = `
             <span class="icon">${data.icon}</span>
-            ${data.title}
+            <p>${data.title}</p>
         `;
         categoryGrid.appendChild(button);
-        
+
         button.addEventListener('click', () => {
             window.location.hash = key;
         });
@@ -259,14 +242,14 @@ function loadConverterScreen(categoryKey) {
         returnToMainScreen(false);
         return;
     }
-    
+
     currentCategoryTitle.textContent = currentUnits.title;
-    
+
     sourceUnitSelect.innerHTML = '';
     targetUnitSelect.innerHTML = '';
-    
+
     const unitKeys = Object.keys(currentUnits.units);
-    
+
     unitKeys.forEach(unitKey => {
         const unitData = currentUnits.units[unitKey];
         const option1 = new Option(unitData.name, unitKey);
@@ -277,16 +260,16 @@ function loadConverterScreen(categoryKey) {
 
     inputValue.value = 1;
     resultValue.value = '0';
-    
+
     mainScreen.classList.add('hidden');
     converterScreen.classList.remove('hidden');
-    
+
     performConversion();
 }
 
 function performConversion() {
     if (!currentCategory) return;
-    
+
     const value = parseFloat(inputValue.value);
     if (isNaN(value)) {
         resultValue.value = 'خطأ';
@@ -295,14 +278,14 @@ function performConversion() {
 
     const source = sourceUnitSelect.value;
     const target = targetUnitSelect.value;
-    
+
     if (currentCategory === 'currency' && (!source || !target)) {
         resultValue.value = 'جاري تحميل العملات...';
         return;
     }
 
     const result = convertUnits(currentCategory, value, source, target);
-    
+
     if (currentCategory === 'temp') {
          resultValue.value = result.toFixed(2);
     } else {
@@ -313,10 +296,10 @@ function performConversion() {
 function swapUnits() {
     const source = sourceUnitSelect.value;
     const target = targetUnitSelect.value;
-    
+
     sourceUnitSelect.value = target;
     targetUnitSelect.value = source;
-    
+
     performConversion();
 }
 
@@ -334,9 +317,9 @@ function handleURLHash() {
 // 5. تهيئة التطبيق (نقطة البداية)
 // =================================================================
 document.addEventListener('DOMContentLoaded', async () => {
-    await fetchCurrencyRates(); 
+    await fetchCurrencyRates();
     renderCategoryCards();
-    
+
     handleURLHash();
 
     window.addEventListener('hashchange', handleURLHash);
@@ -345,7 +328,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     sourceUnitSelect.addEventListener('change', performConversion);
     targetUnitSelect.addEventListener('change', performConversion);
     swapButton.addEventListener('click', swapUnits);
-    
+
     resetButton.addEventListener('click', () => {
         inputValue.value = 0;
         resultValue.value = 0;

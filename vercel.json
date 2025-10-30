@@ -1,0 +1,17 @@
+{
+  "headers": [
+    {
+      "source": "/(.*)\\.(js|css|ico|jpg|jpeg|png|webp|svg|woff|woff2|eot|ttf|otf)",
+      "headers": [
+        { "key": "Cache-Control", "value": "public, max-age=31536000, immutable" }
+      ]
+    },
+    {
+      "source": "/(.*)\\.(html|xml|json)",
+      "headers": [
+        { "key": "Cache-Control", "value": "public, max-age=3600" } 
+        // 3600 ثانية = ساعة واحدة. المستخدم سيرى التغييرات خلال ساعة.
+      ]
+    }
+  ]
+}

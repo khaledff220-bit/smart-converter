@@ -1,0 +1,21 @@
+{
+  "name": "المحول الذكي الشامل",
+  "short_name": "المحول الذكي",
+  "description": "محول وحدات وعملات سريع ودقيق يعمل دون اتصال بالإنترنت.",
+  "start_url": "/index.html",
+  "display": "standalone",
+  "background_color": "#1a202c",
+  "theme_color": "#63b3ed",
+  "icons": [
+    {
+      "src": "/images/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/images/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}

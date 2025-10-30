@@ -7,21 +7,16 @@ const CURRENCY_UPDATE_INTERVAL = 6 * 60 * 60 * 1000; // 6 ساعات
 
 // متغيرات حالة الإعلانات (AdSense/AdMob Logic)
 let interstitialCounter = 0;
-const INTERSTITIAL_FREQUENCY = 2; // تحديث: أظهر الإعلان البيني كل 2 عمليات عودة
+const INTERSTITIAL_FREQUENCY = 3; // إظهار الإعلان البيني كل 3 عمليات عودة
 const AD_CLIENT_ID = 'ca-pub-6516738542213361'; // شفرة الناشر
-const INTERSTITIAL_AD_SLOT = '1710677340'; // شفرة وحدة الإعلان البيني (يرجى مراجعة هذا)
+const INTERSTITIAL_AD_SLOT = '1710677340'; // شفرة وحدة الإعلان البيني
 
-// هيكل البيانات الأساسي للوحدات
+// هيكل البيانات الأساسي للوحدات والعملات العربية الرئيسية
 const ALL_UNITS = {
     'length': {
         title: 'تحويل الطول',
         icon: '📏',
-        content: `
-            **تحويلات الطول:** هي أساس الهندسة والقياسات اليومية. يستخدمها المهندسون، البناؤون، وحتى في التسوق.
-            تساعدك هذه الأداة على التحويل بين الوحدات العالمية مثل المتر والكيلومتر والوحدات الإمبراطورية مثل القدم والميل والبوصة بدقة فائقة.
-            سواء كنت تخطط لمشروع بناء أو تحتاج إلى تحويل مسافات السفر، فإن هذا المحول هو الأداة المثالية لك.
-        `
-        ,
+        content: `**تحويلات الطول:** هي أساس الهندسة والقياسات اليومية. يستخدمها المهندسون، البناؤون، وحتى في التسوق. تساعدك هذه الأداة على التحويل بين الوحدات العالمية مثل المتر والكيلومتر والوحدات الإمبراطورية مثل القدم والميل والبوصة بدقة فائقة.`,
         units: {
             'meter': { name: 'متر (م)', factor: 1 },
             'kilometer': { name: 'كيلومتر (كم)', factor: 1000 },
@@ -33,12 +28,7 @@ const ALL_UNITS = {
     'weight': {
         title: 'تحويل الوزن',
         icon: '⚖️',
-        content: `
-            **تحويلات الوزن:** ضرورية في التجارة، والطبخ، والعلوم. من الكيلوغرامات إلى الأرطال والأونصات، قد يكون التحويل بين وحدات الوزن مربكًا.
-            يوفر لك هذا المحول طريقة سهلة وسريعة لتحويل الأوزان بدقة، مما يضمن أن تكون قياساتك صحيحة دائمًا.
-            سواء كنت تزن مكونات لوصفة طعام أو تحسب شحنة تجارية، اعتمد على المحول الذكي.
-        `
-        ,
+        content: `**تحويلات الوزن:** ضرورية في التجارة، والطبخ، والعلوم. من الكيلوغرامات إلى الأرطال والأونصات، يوفر لك هذا المحول طريقة سهلة وسريعة لتحويل الأوزان بدقة.`,
         units: {
             'kilogram': { name: 'كيلوغرام (كغم)', factor: 1 },
             'gram': { name: 'غرام (غ)', factor: 0.001 },
@@ -50,12 +40,7 @@ const ALL_UNITS = {
     'temp': {
         title: 'تحويل الحرارة',
         icon: '🌡️',
-        content: `
-            **تحويلات الحرارة:** لا غنى عنها في الأرصاد الجوية، والعلوم، والطب.
-            يسمح لك هذا المحول بالتبديل بين مقاييس الحرارة الرئيسية: مئوية (°C)، فهرنهايت (°F)، وكلفن (K).
-            تأكد من أنك تستخدم الوحدة الصحيحة لتقرير الطقس أو التجربة العلمية القادمة.
-        `
-        ,
+        content: `**تحويلات الحرارة:** لا غنى عنها في الأرصاد الجوية، والعلوم، والطب. يسمح لك هذا المحول بالتبديل بين مقاييس الحرارة الرئيسية: مئوية (°C)، فهرنهايت (°F)، وكلفن (K).`,
         units: {
             'celsius': { name: 'مئوية (°C)' },
             'fahrenheit': { name: 'فهرنهايت (°F)' },
@@ -65,33 +50,21 @@ const ALL_UNITS = {
     'currency': {
         title: 'تحويل العملات',
         icon: '💰',
-        content: `
-            **تحويلات العملات الحية:** أساس التجارة العالمية والسفر.
-            يوفر لك المحول الذكي أسعار صرف حية ومحدثة للعملات الرئيسية والعملات العربية.
-            تذكر أن أسعار العملات يتم تحديثها كل 6 ساعات لضمان الدقة، وتعمل حتى في وضع عدم الاتصال بالإنترنت.
-        `
-        ,
+        content: `**تحويلات العملات الحية:** يوفر لك المحول الذكي أسعار صرف حية ومحدثة للعملات الرئيسية والعملات العربية. تذكر أن الأسعار يتم تحديثها كل 6 ساعات.`,
         units: {}
     }
 };
 
 const DESIRED_CURRENCIES = {
-    'USD': 'دولار أمريكي ($)',
-    'EUR': 'يورو (€)',
-    'SAR': 'ريال سعودي (SAR)',
-    'AED': 'درهم إماراتي (AED)',
-    'KWD': 'دينار كويتي (KWD)',
-    'QAR': 'ريال قطري (QAR)',
-    'BHD': 'دينار بحريني (BHD)',
-    'OMR': 'ريال عماني (OMR)',
-    'EGP': 'جنيه مصري (EGP)',
-    'JOD': 'دينار أردني (JOD)',
-    'IQD': 'دينار عراقي (IQD)',
-    'MAD': 'درهم مغربي (MAD)',
-    // ... باقي العملات ...
+    'USD': 'دولار أمريكي ($)', 'EUR': 'يورو (€)', 'JPY': 'ين ياباني (¥)', 'GBP': 'جنيه إسترليني (£)',
+    'SAR': 'ريال سعودي (SAR)', 'AED': 'درهم إماراتي (AED)', 'KWD': 'دينار كويتي (KWD)',
+    'QAR': 'ريال قطري (QAR)', 'BHD': 'دينار بحريني (BHD)', 'OMR': 'ريال عماني (OMR)',
+    'EGP': 'جنيه مصري (EGP)', 'JOD': 'دينار أردني (JOD)', 'IQD': 'دينار عراقي (IQD)',
 };
 
-// متغيرات DOM
+// =================================================================
+// 2. ربط عناصر الواجهة (DOM Elements) - تم توحيد الـ IDs
+// =================================================================
 let currentCategory = null;
 const categoryGrid = document.querySelector('.category-grid');
 const mainScreen = document.getElementById('category-selection');
@@ -100,18 +73,14 @@ const currentCategoryTitle = document.getElementById('current-category-title');
 const sourceUnitSelect = document.getElementById('source-unit');
 const targetUnitSelect = document.getElementById('target-unit');
 const inputValue = document.getElementById('input-value');
-const resultValue = document.getElementById('result-value');
+const resultValue = document.getElementById('result-value'); // 🔥 تم تصحيح ID
 const swapButton = document.getElementById('swap-units-btn');
-const resetButton = document.getElementById('reset-button');
-const categoryContentDiv = document.getElementById('category-content'); // 🔥 الجديد: قسم محتوى الناشر
-const contentText = document.getElementById('content-text'); // 🔥 الجديد: النص داخل قسم محتوى الناشر
-
-// 🔥 الجديد: إضافة مستمع لزر العودة في شريط التنقل
-document.querySelector('nav a[href="#home"]').addEventListener('click', returnToMainScreen);
-
+const resetButton = document.getElementById('reset-btn'); // 🔥 تم تصحيح ID
+const categoryContentDiv = document.getElementById('category-content');
+const contentText = document.getElementById('content-text');
 
 // =================================================================
-// 2. دوال التحويل الأساسية
+// 3. دوال التحويل الأساسية
 // =================================================================
 function convertTemperature(value, from, to) {
     let tempInC = 0;
@@ -132,21 +101,28 @@ function convertUnits(category, value, sourceUnit, targetUnit) {
     }
 
     const units = ALL_UNITS[category].units;
-    let baseValue = 0;
+    
+    // 🔥 تم تحويل الـ unitKey إلى حالة الأحرف الصغيرة ليتوافق مع طريقة تخزيننا
+    const sourceKey = sourceUnit.toLowerCase();
+    const targetKey = targetUnit.toLowerCase();
 
     if (category === 'currency') {
-        const sourceRate = units[sourceUnit].rate;
-        const targetRate = units[targetUnit].rate;
+        const sourceRate = units[sourceKey].rate;
+        const targetRate = units[targetKey].rate;
 
-        baseValue = value / sourceRate;
+        if (!sourceRate || !targetRate) return 0; // حماية ضد عدم تحميل الأسعار
+        
+        let baseValue = value / sourceRate;
         return baseValue * targetRate;
     } else {
-        baseValue = value * units[sourceUnit].factor;
-        return baseValue / units[targetUnit].factor;
+        // الوحدات الأخرى (الطول، الوزن)
+        let baseValue = value * units[sourceKey].factor;
+        return baseValue / units[targetKey].factor;
     }
 }
 
 async function fetchCurrencyRates() {
+    // منطق جلب وتخزين أسعار العملات (بقي كما هو وسليم)
     const cachedRates = localStorage.getItem(CURRENCY_CACHE_KEY);
 
     if (cachedRates) {
@@ -187,6 +163,7 @@ function updateCurrencyUnits(rates) {
     ALL_UNITS.currency.units = {};
     for (const code in DESIRED_CURRENCIES) {
         if (rates[code]) {
+            // 🔥 يتم تخزين المفتاح بحالة الأحرف الصغيرة ليتوافق مع اختيار المستخدم
             ALL_UNITS.currency.units[code.toLowerCase()] = {
                 name: DESIRED_CURRENCIES[code],
                 rate: rates[code]
@@ -195,47 +172,41 @@ function updateCurrencyUnits(rates) {
     }
 }
 
-
 // =================================================================
-// 3. منطق الإعلانات (AdSense Logic) - تم التحديث
+// 4. منطق الإعلانات (AdSense Logic)
 // =================================================================
 
 function showInterstitialAd() {
-    // ** منطق الإعلان البيني (AdSense) **
-    
-    // نستخدم الصيغة الرسمية لطلب إعلان بملء الشاشة عبر AdSense
     try {
         if (window.adsbygoogle) {
             (adsbygoogle = window.adsbygoogle || []).push({
-                google_ad_client: AD_CLIENT_ID, // ca-pub-6516738542213361
+                google_ad_client: AD_CLIENT_ID,
                 enable_page_level_ads: true,
                 overlays: {
-                    google_ad_slot: INTERSTITIAL_AD_SLOT 
+                    google_ad_slot: INTERSTITIAL_AD_SLOT
                 }
             });
-            console.log("Interstitial ad requested via push.");
+            console.log("Interstitial ad requested.");
         }
     } catch (e) {
         console.error("Error showing interstitial ad:", e);
     }
 }
 
-
-// دالة العودة للشاشة الرئيسية (Monetization Logic)
 function returnToMainScreen(shouldUpdateHash = true) {
     if (shouldUpdateHash && window.location.hash) {
         window.history.pushState("", document.title, window.location.pathname);
     }
 
-    // 1. إخفاء شاشة التحويل وإظهار الرئيسية
+    // إخفاء شاشة التحويل وإظهار الرئيسية
     converterScreen.classList.add('hidden');
     mainScreen.classList.remove('hidden');
     currentCategory = null;
 
-    // 🔥 الجديد: إظهار قسم الأسئلة الشائعة عند العودة للشاشة الرئيسية
+    // إظهار قسم الأسئلة الشائعة
     document.getElementById('faq-section').classList.remove('hidden');
-
-    // 2. منطق إظهار الإعلان البيني (يعمل كل 2 عمليات عودة)
+    
+    // منطق إظهار الإعلان البيني
     interstitialCounter++;
     if (interstitialCounter >= INTERSTITIAL_FREQUENCY) {
         showInterstitialAd();
@@ -243,15 +214,15 @@ function returnToMainScreen(shouldUpdateHash = true) {
     }
 }
 
-
 // =================================================================
-// 4. دوال بناء الواجهة والتفاعل
+// 5. دوال بناء الواجهة والتفاعل
 // =================================================================
 
 function renderCategoryCards() {
+    categoryGrid.innerHTML = '';
     for (const key in ALL_UNITS) {
         const data = ALL_UNITS[key];
-        const button = document.createElement('div'); // تم تغييرها إلى div لتحسين التصميم
+        const button = document.createElement('div');
         button.className = 'category-card';
         button.dataset.category = key;
         button.innerHTML = `
@@ -276,11 +247,11 @@ function loadConverterScreen(categoryKey) {
     }
 
     currentCategoryTitle.textContent = currentUnits.title;
-
-    // 🔥 الجديد: تحديث محتوى الناشر
-    contentText.textContent = currentUnits.content.trim();
-    categoryContentDiv.classList.remove('hidden');
-
+    
+    // تحديث محتوى الناشر وإظهار الشاشة
+    contentText.innerHTML = currentUnits.content; 
+    
+    // ملء قوائم الاختيار بالوحدات
     sourceUnitSelect.innerHTML = '';
     targetUnitSelect.innerHTML = '';
 
@@ -288,22 +259,22 @@ function loadConverterScreen(categoryKey) {
 
     unitKeys.forEach(unitKey => {
         const unitData = currentUnits.units[unitKey];
-        const option1 = new Option(unitData.name, unitKey);
-        const option2 = new Option(unitData.name, unitKey);
+        // 🔥 يتم إرسال المفتاح بحالة الأحرف الصغيرة ليتوافق مع منطق التحويل
+        const option1 = new Option(unitData.name, unitKey.toLowerCase());
+        const option2 = new Option(unitData.name, unitKey.toLowerCase()); 
         sourceUnitSelect.appendChild(option1);
         targetUnitSelect.appendChild(option2);
     });
 
+    // تعيين القيم الافتراضية
     inputValue.value = 1;
     resultValue.value = '0';
 
     mainScreen.classList.add('hidden');
     converterScreen.classList.remove('hidden');
+    document.getElementById('faq-section').classList.add('hidden');
 
     performConversion();
-
-    // 🔥 الجديد: إخفاء قسم الأسئلة الشائعة عند الدخول لشاشة التحويل
-    document.getElementById('faq-section').classList.add('hidden');
 }
 
 function performConversion() {
@@ -317,16 +288,19 @@ function performConversion() {
 
     const source = sourceUnitSelect.value;
     const target = targetUnitSelect.value;
-
-    if (currentCategory === 'currency' && (!source || !target)) {
-        resultValue.value = 'جاري تحميل العملات...';
-        return;
+    
+    // 🔥 حماية في حالة عدم تحميل العملات
+    if (currentCategory === 'currency' && !ALL_UNITS.currency.units[source]) {
+         resultValue.value = 'جاري تحميل العملات...';
+         // نطلب تحميلها مرة أخرى
+         fetchCurrencyRates(); 
+         return;
     }
 
     const result = convertUnits(currentCategory, value, source, target);
 
     if (currentCategory === 'temp') {
-         resultValue.value = result.toFixed(2);
+          resultValue.value = result.toFixed(2);
     } else {
         resultValue.value = result.toFixed(4);
     }
@@ -353,29 +327,26 @@ function handleURLHash() {
 
 
 // =================================================================
-// 5. تهيئة التطبيق (نقطة البداية)
+// 6. تهيئة التطبيق (نقطة البداية)
 // =================================================================
-    document.addEventListener('DOMContentLoaded', async () => {
+document.addEventListener('DOMContentLoaded', async () => {
+    // 1. جلب العملات
     await fetchCurrencyRates();
+    // 2. بناء واجهة الفئات
     renderCategoryCards();
 
+    // 3. معالجة الرابط (URL Hash)
     handleURLHash();
-
     window.addEventListener('hashchange', handleURLHash);
 
+    // 4. ربط المستمعات بالأحداث
     inputValue.addEventListener('input', performConversion);
     sourceUnitSelect.addEventListener('change', performConversion);
     targetUnitSelect.addEventListener('change', performConversion);
     swapButton.addEventListener('click', swapUnits);
+    resetButton.addEventListener('click', returnToMainScreen); // 🔥 تم تصحيح وظيفة زر المسح/العودة
 
-    resetButton.addEventListener('click', () => {
-        inputValue.value = 0;
-        resultValue.value = 0;
-        returnToMainScreen();
-    });
-
-    document.querySelector('header').addEventListener('click', returnToMainScreen);
-    
-    // 🔥 الجديد: إضافة مستمع لزر العودة في شريط التنقل (تم نقله للأعلى)
-    // document.querySelector('nav a[href="#home"]').addEventListener('click', returnToMainScreen);
+    // ربط التنقل بالواجهة
+    document.querySelector('nav a[href="#home"]').addEventListener('click', returnToMainScreen);
+    document.querySelector('header h1').addEventListener('click', returnToMainScreen);
 });

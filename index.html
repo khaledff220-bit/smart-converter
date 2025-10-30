@@ -56,12 +56,11 @@
     <main id="category-selection">
         <h2>اختر نوع التحويل الذي تحتاجه</h2>
         <div class="category-grid">
-            <!-- سيتم إضافة بطاقات الفئات هنا بواسطة script.js -->
-            </div>
+        </div>
     </main>
 
     <section id="converter-screen" class="hidden">
-        <h2 id="current-category-title">تحويل الطول</h2>
+        <h2 id="current-category-title"></h2>
 
         <div class="input-group source">
             <input type="number" id="input-value" placeholder="أدخل القيمة" value="1" min="0">
@@ -81,39 +80,17 @@
 
         <button id="reset-btn" class="reset-button">مسح</button>
 
-        <!-- ** محتوى الناشر (Publisher Content) - لتحسين AdSense ** -->
-        <div id="category-content" class="hidden">
+        <div id="category-content">
             <h3>لماذا هذا المحول؟</h3>
             <p id="content-text" class="content-text"></p>
         </div>
-        <!-- نهاية محتوى الناشر -->
-    </section>
-        <h2 id="current-category-title">تحويل الطول</h2>
-
-        <div class="input-group source">
-            <input type="number" id="input-value" placeholder="أدخل القيمة" value="1" min="0">
-            <select id="source-unit">
-            </select>
-        </div>
-
-        <button id="swap-units-btn" class="swap-button">
-            🔄
-        </button>
-
-        <div class="input-group result">
-            <input type="text" id="result-value" value="0" readonly>
-            <select id="target-unit">
-            </select>
-        </div>
-
-        <button id="reset-btn" class="reset-button">مسح</button>
     </section>
 
     <footer class="ad-banner">
         <ins class="adsbygoogle"
-             style="display:block"
+             style="display:block; text-align:center;"
              data-ad-client="ca-pub-6516738542213361"
-             data-ad-slot="1710677340"
+             data-ad-slot="1710677340" 
              data-ad-format="auto"
              data-full-width-responsive="true"></ins>
         <script>
@@ -137,7 +114,7 @@
         </div>
     </section>
 
-    <script src="script.js"></script>
+    <script src="app.js"></script> 
     <script>
         if ('serviceWorker' in navigator) {
             window.addEventListener('load', () => {

@@ -9,8 +9,7 @@
     {
       "source": "/(.*)\\.(html|xml|json)",
       "headers": [
-        { "key": "Cache-Control", "value": "public, max-age=3600" } 
-        // 3600 ثانية = ساعة واحدة. المستخدم سيرى التغييرات خلال ساعة.
+        { "key": "Cache-Control", "value": "public, max-age=3600" }
       ]
     }
   ]

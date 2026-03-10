@@ -1,0 +1,313 @@
+/* --- CSS Update: Modern Responsive Design and Accessibility Fixes --- */
+
+:root {
+    --primary-color: #4A90E2; /* أزرق جذاب */
+    --secondary-color: #63b3ed;
+    --background-color: #1a202c; /* خلفية داكنة */
+    --card-bg: #2d3748; /* خلفية البطاقة */
+    --text-color: #e2e8f0; /* نص فاتح */
+    --highlight-color: #FFD700; /* لون ذهبي للنص المميز */
+    --border-radius: 12px;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: var(--background-color);
+    color: var(--text-color);
+    line-height: 1.6;
+    padding: 20px 10px;
+    min-height: 100vh;
+    display: flex; /* 🔥 تحسين: استخدام flexbox لترتيب العناصر */
+    flex-direction: column;
+    align-items: center;
+}
+
+main {
+    flex-grow: 1; /* السماح للمحتوى الرئيسي بالنمو */
+    width: 100%;
+    max-width: 900px;
+}
+
+header {
+    text-align: center;
+    margin-bottom: 20px; /* تقليل المسافة */
+    width: 100%;
+    max-width: 900px;
+}
+
+h1 {
+    color: var(--primary-color);
+    font-size: 2.2em;
+    font-weight: 900; /* خط سميك جداً للعنوان */
+    letter-spacing: 1px;
+}
+
+h2 {
+    color: var(--secondary-color);
+    text-align: center;
+    margin-bottom: 25px;
+    font-size: 1.6em;
+}
+
+/* 🌟 تحسينات النص الوصفي (النص الخاص بـ AdSense) 🌟 */
+.description-text {
+    text-align: center;
+    font-size: 1.2em; /* حجم أكبر */
+    color: var(--highlight-color); /* لون جذاب (ذهبي) */
+    font-weight: bold; /* خط سميك */
+    margin-bottom: 40px;
+    padding: 0 15px;
+    text-shadow: 0 0 5px rgba(255, 215, 0, 0.3); /* تأثير زاهي خفيف */
+}
+
+/* --- Category Selection Screen --- */
+#category-selection {
+    /* تم نقل max-width و margin إلى main في body */
+}
+
+.category-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 15px;
+    padding: 10px;
+}
+
+.category-card {
+    background-color: var(--card-bg);
+    padding: 20px;
+    border-radius: var(--border-radius);
+    text-align: center;
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s;
+    border: 1px solid transparent;
+}
+
+.category-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+    border-color: var(--primary-color);
+}
+
+.category-card span {
+    display: block;
+    font-size: 3em;
+    margin-bottom: 10px;
+}
+
+.category-card p {
+    font-weight: bold;
+    font-size: 1.1em;
+}
+
+/* --- Converter Screen --- */
+#converter-screen {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: var(--card-bg);
+    border-radius: var(--border-radius);
+}
+
+.input-group {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 15px;
+}
+
+input[type="number"],
+input[type="text"],
+select {
+    flex-grow: 1;
+    padding: 12px;
+    border-radius: 8px;
+    border: 1px solid #4a5568;
+    background-color: #2c313a;
+    color: var(--text-color) !important; /* 🔥 إصلاح مشكلة اللون الأسود (1) */
+    font-size: 1em;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+}
+
+/* 🔥 إصلاح مشكلة اللون الأسود (2): التأكد من ظهور النص الفاتح في القائمة المنسدلة */
+select option {
+    background-color: #2c313a; 
+    color: var(--text-color); 
+}
+
+
+select {
+    max-width: 150px;
+    cursor: pointer;
+}
+
+/* زر التبديل */
+.swap-button {
+    display: block;
+    width: 60px;
+    height: 60px;
+    margin: 20px auto;
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    border-radius: 50%;
+    font-size: 1.5em;
+    cursor: pointer;
+    transition: background-color 0.2s, transform 0.1s;
+}
+
+.swap-button:hover {
+    background-color: #3b74b9;
+    transform: rotate(180deg);
+}
+
+.reset-button {
+    display: block;
+    width: 100%;
+    padding: 15px;
+    background-color: #E53E3E; /* أحمر */
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 1.1em;
+    cursor: pointer;
+    margin-top: 20px;
+    transition: background-color 0.2s;
+}
+
+.reset-button:hover {
+    background-color: #c53030;
+}
+
+/* إخفاء العنصر */
+.hidden {
+    display: none !important;
+}
+
+/* --- Navigation Bar --- */
+.main-nav {
+    width: 100%;
+    max-width: 900px;
+    background-color: #2d3748; /* لون خلفية شريط التنقل */
+    padding: 10px 0;
+    margin-bottom: 30px;
+    border-radius: var(--border-radius);
+    display: flex;
+    justify-content: space-around;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+}
+
+.main-nav a {
+    color: var(--text-color);
+    text-decoration: none;
+    font-weight: bold;
+    padding: 5px 10px;
+    transition: color 0.2s, background-color 0.2s;
+    border-radius: 6px;
+}
+
+.main-nav a:hover {
+    color: var(--highlight-color);
+    background-color: #4a5568;
+}
+
+/* --- Content & FAQ Sections --- */
+#faq-section {
+    width: 100%;
+    max-width: 900px;
+    margin-top: 50px;
+    padding: 20px;
+    background-color: var(--card-bg);
+    border-radius: var(--border-radius);
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+}
+
+#faq-section h2 {
+    color: var(--primary-color);
+    margin-bottom: 30px;
+}
+
+.faq-item {
+    margin-bottom: 20px;
+    padding-bottom: 15px;
+    border-bottom: 1px dashed #4a5568;
+}
+
+.faq-question {
+    color: var(--secondary-color);
+    font-size: 1.2em;
+    cursor: pointer;
+    margin-bottom: 5px;
+}
+
+.faq-answer {
+    font-size: 1em;
+    padding-right: 15px;
+    color: #a0aec0; /* لون رمادي فاتح للنص */
+}
+
+/* --- Publisher Content Section --- */
+#category-content {
+    margin-top: 30px;
+    padding: 15px;
+    border: 1px solid var(--primary-color);
+    border-radius: var(--border-radius);
+    background-color: #2d3748;
+}
+
+#category-content h3 {
+    color: var(--highlight-color);
+    margin-bottom: 10px;
+    font-size: 1.4em;
+}
+
+.content-text {
+    font-size: 1em;
+    color: var(--text-color);
+}
+
+/* --- Footer and Ad Banner --- */
+footer.ad-banner {
+    text-align: center;
+    padding: 15px 0;
+    margin-top: 40px;
+    border-top: 1px solid #4a5568;
+    width: 100%;
+    max-width: 900px;
+}
+
+@media (max-width: 600px) {
+    .main-nav {
+        flex-direction: column;
+    }
+    .main-nav a {
+        padding: 5px;
+        text-align: center;
+    }
+}
+
+@media (max-width: 600px) {
+    body {
+        padding: 10px;
+    }
+    h1 {
+        font-size: 1.8em;
+    }
+    .description-text {
+        font-size: 1em;
+    }
+    .input-group {
+        flex-direction: column;
+    }
+    select, input {
+        width: 100% !important;
+        max-width: none !important;
+    }
+}

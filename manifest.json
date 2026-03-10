@@ -1,21 +1,73 @@
 {
   "name": "المحول الذكي الشامل",
-  "short_name": "المحول الذكي",
-  "description": "محول وحدات وعملات سريع ودقيق يعمل دون اتصال بالإنترنت.",
-  "start_url": "/index.html",
+  "short_name": "محول ذكي",
+  "description": "محول العملات والوحدات والتاريخ - أداة عربية مجانية تعمل بدون إنترنت (PWA) مع دعم تحويل العملات بأسعار حية، تحويل الطول، الوزن، الحرارة، والتاريخ الهجري والميلادي",
+  "lang": "ar",
+  "dir": "rtl",
+  "start_url": "/",
+  "scope": "/",
   "display": "standalone",
-  "background_color": "#1a202c",
-  "theme_color": "#63b3ed",
+  "display_override": ["standalone", "window-controls-overlay", "minimal-ui"],
+  "background_color": "#ffffff",
+  "theme_color": "#2563eb",
+  "orientation": "portrait",
+  "id": "smart-converter-pwa-v2",
+  "categories": ["utilities", "productivity", "tools"],
+  "prefer_related_applications": false,
+  "related_applications": [],
+  "shortcuts": [
+    {
+      "name": "تحويل العملات",
+      "short_name": "عملات",
+      "description": "تحويل العملات العربية والعالمية بأسعار حية",
+      "url": "/#currency"
+    },
+    {
+      "name": "تحويل الطول",
+      "short_name": "طول",
+      "description": "تحويل وحدات الطول بين المتر، القدم، الإنش والمزيد",
+      "url": "/#length"
+    },
+    {
+      "name": "تحويل الوزن",
+      "short_name": "وزن",
+      "description": "تحويل وحدات الوزن بين الكيلوجرام، الرطل، الأوقية",
+      "url": "/#weight"
+    },
+    {
+      "name": "تحويل الحرارة",
+      "short_name": "حرارة",
+      "description": "تحويل درجات الحرارة بين سيليزي، فهرنهايت، كلفن",
+      "url": "/#temperature"
+    },
+    {
+      "name": "تحويل التاريخ",
+      "short_name": "تاريخ",
+      "description": "تحويل التاريخ بين هجري وميلادي بدقة",
+      "url": "/#date"
+    }
+  ],
   "icons": [
+    {
+      "src": "/images/apple-touch-icon.png",
+      "sizes": "180x180",
+      "type": "image/png",
+      "purpose": "any"
+    },
     {
       "src": "/images/icon-192.png",
       "sizes": "192x192",
-      "type": "image/png"
+      "type": "image/png",
+      "purpose": "any maskable"
     },
     {
       "src": "/images/icon-512.png",
       "sizes": "512x512",
-      "type": "image/png"
+      "type": "image/png",
+      "purpose": "any maskable"
     }
-  ]
+  ],
+  "launch_handler": {
+    "client_mode": ["navigate-existing", "auto"]
+  }
 }

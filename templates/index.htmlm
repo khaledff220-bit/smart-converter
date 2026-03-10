@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>المحول الذكي الشامل: تحويل العملات والطول والوزن والحرارة والتاريخ</title>
+    
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-3TCRRVM4Q9"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-3TCRRVM4Q9');
+    </script>
+
+    <meta property="og:image" content="https://smart-converter-plum.vercel.app/static/images/og-image.jpg">
+
+    <!-- Google AdSense -->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6516738542213361" crossorigin="anonymous"></script>
+    <meta name="google-adsense-account" content="ca-pub-6516738542213361">
+    
+    <!-- Google Site Verification -->
+    <meta name="google-site-verification" content="1YBP2sbUMH1uIADFn88vYgs-UHOOlEoYkxtp9tixugE" />
+    
+    <!-- Bing Site Verification -->
+    <meta name="msvalidate.01" content="EFC61E5D106220023439CAF98B06427F" />
+    
+    <!-- SEO Meta -->
+    <meta name="description" content="محول ذكي لتحويل العملات والطول والوزن والحرارة والتاريخ الهجري والميلادي. أداة مجانية تعمل بدون إنترنت (PWA).">
+    <meta name="keywords" content="محول العملات, تحويل الطول, تحويل الوزن, تحويل الحرارة, تحويل التاريخ, محول هجري ميلادي">
+    <meta name="author" content="المحول الذكي الشامل">
+    
+    <!-- PWA -->
+    <link rel="manifest" href="/manifest.json">
+    <meta name="theme-color" content="#2563eb">
+    <link rel="apple-touch-icon" href="/static/images/apple-touch-icon.png">
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="/static/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;900&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header class="site-header">
+        <nav class="main-nav container">
+            <div class="nav-brand">
+                <a href="/" class="logo">🌟 المحول الذكي</a>
+            </div>
+            <button class="nav-toggle">☰</button>
+            <ul class="nav-menu">
+                <li><a href="/" class="active">الرئيسية</a></li>
+                <li><a href="#currency">💰 العملات</a></li>
+                <li><a href="#length">📏 الطول</a></li>
+                <li><a href="#weight">⚖️ الوزن</a></li>
+                <li><a href="#temperature">🌡️ الحرارة</a></li>
+                <li><a href="#date">📅 التاريخ</a></li>
+                <li><a href="about">من نحن</a></li>
+                <li><a href="privacy">الخصوصية</a></li>
+            </ul>
+            <div class="nav-actions">
+                <button id="theme-toggle">🌙</button>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <!-- Hero Section -->
+        <section class="hero">
+            <div class="container">
+                <h1>المحول الذكي الشامل</h1>
+                <p class="hero-subtitle">تحويل العملات والطول والوزن والحرارة والتاريخ بسرعة ودقة</p>
+                
+                <!-- AdSense -->
+                <div class="adsense-responsive">
+                    <ins class="adsbygoogle"
+                         style="display:block"
+                         data-ad-client="ca-pub-6516738542213361"
+                         data-ad-slot="1710677340"
+                         data-ad-format="auto"
+                         data-full-width-responsive="true"></ins>
+                    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+                </div>
+            </div>
+        </section>
+
+        <!-- أدوات التحويل -->
+        <section id="tools" class="tools">
+            <div class="container">
+                <h2>اختر نوع التحويل</h2>
+                <div class="tools-grid" id="tools-grid">
+                    <!-- سيتم تعبئة الأدوات بواسطة JavaScript -->
+                </div>
+            </div>
+        </section>
+
+        <!-- الأسئلة الشائعة -->
+        <section id="faq" class="faq">
+            <div class="container">
+                <h2>الأسئلة الشائعة</h2>
+                <div class="faq-grid" id="faq-grid">
+                    <!-- سيتم تعبئة الأسئلة بواسطة JavaScript -->
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="site-footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-about">
+                    <h3>🌟 عن المحول الذكي</h3>
+                    <p>أداة عربية مجانية لتحويل العملات والوحدات، تعمل بدون إنترنت (PWA).</p>
+                </div>
+                <div class="footer-links">
+                    <h3>روابط سريعة</h3>
+                    <ul>
+                        <li><a href="/">الرئيسية</a></li>
+                        <li><a href="about">من نحن</a></li>
+                        <li><a href="privacy">سياسة الخصوصية</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-copyright">
+                <p>© 2025-2026 المحول الذكي الشامل</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="/static/app.js" defer></script>
+    <script>
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.register('/service-worker.js');
+        }
+    </script>
+</body>
+</html>
